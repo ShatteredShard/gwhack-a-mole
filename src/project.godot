@@ -8,15 +8,73 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Fruit",
+"language": "GDScript",
+"path": "res://scenes/entities/fruit.gd"
+}, {
+"base": "Reference",
+"class": "GotmDebug",
+"language": "GDScript",
+"path": "res://gotm/GotmDebug.gd"
+}, {
+"base": "Reference",
+"class": "GotmFile",
+"language": "GDScript",
+"path": "res://gotm/GotmFile.gd"
+}, {
+"base": "Reference",
+"class": "GotmLobby",
+"language": "GDScript",
+"path": "res://gotm/GotmLobby.gd"
+}, {
+"base": "Reference",
+"class": "GotmLobbyFetch",
+"language": "GDScript",
+"path": "res://gotm/GotmLobbyFetch.gd"
+}, {
+"base": "Reference",
+"class": "GotmUser",
+"language": "GDScript",
+"path": "res://gotm/GotmUser.gd"
+}, {
+"base": "Reference",
+"class": "_GotmDebugImpl",
+"language": "GDScript",
+"path": "res://gotm/_impl/_GotmDebugImpl.gd"
+}, {
+"base": "Reference",
+"class": "_GotmImpl",
+"language": "GDScript",
+"path": "res://gotm/_impl/_GotmImpl.gd"
+}, {
+"base": "Reference",
+"class": "_GotmImplUtility",
+"language": "GDScript",
+"path": "res://gotm/_impl/_GotmImplUtility.gd"
+} ]
 _global_script_class_icons={
-
+"Fruit": "",
+"GotmDebug": "",
+"GotmFile": "",
+"GotmLobby": "",
+"GotmLobbyFetch": "",
+"GotmUser": "",
+"_GotmDebugImpl": "",
+"_GotmImpl": "",
+"_GotmImplUtility": ""
 }
 
 [application]
 
 config/name="Gwhak-a-mole"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Gotm="*res://gotm/Gotm.gd"
 
 [display]
 
