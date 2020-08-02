@@ -10,15 +10,17 @@ func _ready():
 func _on_button_pressed():
 	$button.disabled = true
 	var lobbies:Array = yield(_fetch.first(1), "completed")
+	var yes=false
 	if lobbies.size()>0:
 		var lobby = lobbies.pop_front()
-		var success = yield(lobby.join(), "completed")
-		if success:
-			get_tree().change_scene("res://scenes/game.tscn")
-		else:
-			$button.disabled = false
-	else:
-		print("bah jvais host")
+		if !lobby.hidden:
+			var success = yield(lobby.join(), "completed")
+			if success:
+				get_tree().change_scene("res://scenes/game.tscn")
+				yes = true
+			else:
+				$button.disabled = false
+	if !yes:
 		Gotm.host_lobby(false)
 		Gotm.lobby.hidden = false
 		Gotm.lobby.name = "test"
