@@ -16,6 +16,8 @@ var state = STATE.waiting
 
 var players_id := []
 
+var players_name := {}
+
 var players_fruits := {}
 
 var fruit_count = 0
@@ -34,6 +36,7 @@ func _ready():
 			var peer = NetworkedMultiplayerENet.new()
 			peer.create_client(Gotm.lobby.host.address, PORT)
 			get_tree().set_network_peer(peer)
+			rpc("set_player_name",get_tree().get_network_unique_id(),Gotm.user.display_name)
 		get_tree().connect("server_disconnected", self, "_server_disconnected")
 	else:
 		get_tree().change_scene("res://scenes/menu/menu.tscn")
@@ -41,11 +44,22 @@ func _ready():
 
 func _player_connected(id):
 	if Gotm.lobby.is_host():
-		players_id.push_back(id)
-		rpc("_start_game")
+		if !Gotm.lobby.hidden:
+			Gotm.lobby.hidden = true
+			players_id.push_back(id)
+			rpc("_start_game")
+		else:
+			pass
+
+remotesync func set_player_name(id,name):
+	players_name[id]=name
+	if id==get_tree().get_network_unique_id():
+		$hud/label_host.text=name
+	else:
+		$hud/label_peer.text=name
 
 remotesync func _start_game():
-	Gotm.lobby.hidden = true
+	rpc("set_player_name",get_tree().get_network_unique_id(),Gotm.user.display_name)
 	state = STATE.starting
 	$waiting.hide()
 	if Gotm.lobby !=null:
@@ -53,13 +67,25 @@ remotesync func _start_game():
 			for id in players_id:
 				players_fruits[id]=[]
 				rpc("create_hammer",id)
-			rset("players_id",players_id)
-			rset("players_fruits",players_fruits)
+			rpc("players_fruits",players_fruits,players_id)
+
+remotesync func players_fruits(new_players_fruits,new_players_id):
+	players_id = new_players_id
+	players_fruits=new_players_fruits
+#	for id in players_id:
+#		if players_fruits.has(id):
+#			if id==get_tree().get_network_unique_id():
+#				$hud/label_host.text=str(players_fruits[id])
+#			else:
+#				$hud/label_peer.text=str(players_fruits[id])
 
 remotesync func create_hammer(id):
 	var hammer = HAMMER_PACKED.instance()
 	hammer.position = Vector2(512/4+512/2*id,288/2)
 	hammer.id = id
+	if Gotm.lobby !=null:
+		if Gotm.lobby.is_host():
+			hammer.is_host=true
 	hammer.set_network_master(id)
 	add_child(hammer)
 
@@ -83,13 +109,6 @@ func _server_disconnected():
 func _on_btn_alone_pressed():
 	_start_game()
 
-func _process(delta):
-	for id in players_id:
-		if players_fruits.has(id):
-			if id!=1:
-				$hud/label_peer.text=str(players_fruits[id])
-			else:
-				$hud/label_host.text=str(players_fruits[id])
 
 func _on_timer_timeout():
 	print("oui")
@@ -108,7 +127,7 @@ master func hit_fruit(id_player,id_fruit):
 			if obj.id == id_fruit:
 				obj.queue_free()
 				players_fruits[id_player].push_back(id_fruit)
-				rset("players_fruits",players_fruits)
+				rpc("players_fruits",players_fruits,players_id)
 				rpc("destroy_fruit",id_fruit)
 
 remote func destroy_fruit(id):

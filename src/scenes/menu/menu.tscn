@@ -10,16 +10,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="button" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -21.5
-margin_top = -20.0
-margin_right = 21.5
-text = "PLAY"
-
 [node name="label" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
@@ -27,5 +17,42 @@ margin_bottom = 14.0
 [node name="timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
-[connection signal="pressed" from="button" to="." method="_on_button_pressed"]
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="v_box_container"]
+margin_top = 109.0
+margin_right = 512.0
+margin_bottom = 123.0
+text = "Gwhak a mole"
+align = 1
+
+[node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
+margin_top = 155.0
+margin_right = 512.0
+margin_bottom = 179.0
+alignment = 1
+
+[node name="line_edit" type="LineEdit" parent="v_box_container/h_box_container"]
+margin_left = 184.0
+margin_right = 280.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 96, 0 )
+placeholder_text = "Name"
+
+[node name="button" type="Button" parent="v_box_container/h_box_container"]
+margin_left = 284.0
+margin_right = 327.0
+margin_bottom = 24.0
+disabled = true
+text = "PLAY"
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+[connection signal="text_changed" from="v_box_container/h_box_container/line_edit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="v_box_container/h_box_container/button" to="." method="_on_button_pressed"]

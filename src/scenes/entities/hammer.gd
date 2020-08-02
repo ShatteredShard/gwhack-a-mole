@@ -4,6 +4,8 @@ var fruit_under:Fruit = null
 
 var id := 0
 
+var is_host:=false
+
 func _input(event):
 	if !$animation_player.is_playing() and is_network_master():
 		if event is InputEventMouseButton:
@@ -24,8 +26,13 @@ puppet func set_pos(p_pos):
 
 func hit():
 	if fruit_under != null:
-		print("yes")
+		
 		get_parent().rpc("hit_fruit",id,fruit_under.id)
+		
+		if !is_host:
+			fruit_under.queue_free()
+		fruit_under=null
+		
 
 
 func _on_hammer_body_entered(body):
