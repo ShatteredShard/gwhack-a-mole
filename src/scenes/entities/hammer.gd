@@ -4,7 +4,17 @@ var fruit_under:Fruit = null
 
 var id := 0
 
+var display_name = 'b'
+
 var is_host:=false
+
+func _ready():
+	$label.text=display_name
+	$sprite.material=$sprite.material.duplicate()
+	if is_network_master():
+		$sprite.material.set_shader_param("color_replace",Color("#7278C2"))
+	else:
+		$sprite.material.set_shader_param("color_replace",Color("#EA3131"))
 
 func _input(event):
 	if !$animation_player.is_playing() and is_network_master():

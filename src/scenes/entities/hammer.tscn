@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/items/marteau1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/entities/hammer.gd" type="Script" id=2]
+[ext_resource path="res://shaders/replace_color.shader" type="Shader" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+[sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/color_base = Color( 0.309804, 0.65098, 0.247059, 1 )
+shader_param/color_replace = Color( 0.447059, 0.470588, 0.760784, 1 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "hit"
@@ -18,7 +23,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.5, 0.6, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.3, 0.3 ), Vector2( 0.1, 0.1 ), Vector2( 0.15, 0.15 ), Vector2( 0.25, 0.25 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -36,17 +41,36 @@ tracks/1/keys = {
 }
 
 [node name="hammer" type="Area2D"]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="sprite" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+material = SubResource( 5 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, -2 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
-playback_speed = 2.0
+playback_speed = 4.0
 anims/hit = SubResource( 2 )
+
+[node name="label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -32.0
+margin_right = 20.0
+margin_bottom = -18.0
+grow_horizontal = 2
+text = "a"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="." to="." method="_on_hammer_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_hammer_body_exited"]

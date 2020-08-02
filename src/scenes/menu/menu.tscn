@@ -28,31 +28,22 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="v_box_container"]
-margin_top = 109.0
+margin_top = 111.0
 margin_right = 512.0
-margin_bottom = 123.0
+margin_bottom = 125.0
 text = "Gwhak a mole"
 align = 1
 
 [node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
-margin_top = 155.0
+margin_top = 157.0
 margin_right = 512.0
-margin_bottom = 179.0
+margin_bottom = 177.0
 alignment = 1
 
-[node name="line_edit" type="LineEdit" parent="v_box_container/h_box_container"]
-margin_left = 184.0
-margin_right = 280.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 96, 0 )
-placeholder_text = "Name"
-
 [node name="button" type="Button" parent="v_box_container/h_box_container"]
-margin_left = 284.0
-margin_right = 327.0
-margin_bottom = 24.0
-disabled = true
+margin_left = 234.0
+margin_right = 277.0
+margin_bottom = 20.0
 text = "PLAY"
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
-[connection signal="text_changed" from="v_box_container/h_box_container/line_edit" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="v_box_container/h_box_container/button" to="." method="_on_button_pressed"]
