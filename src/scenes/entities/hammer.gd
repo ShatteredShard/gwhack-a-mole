@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Hammer
+
 var fruits_under:Array = []
 
 var id := 0
@@ -9,7 +11,7 @@ var display_name = 'b'
 var is_host:=false
 
 func _ready():
-	$label.text=display_name
+	
 	$sprite.material=$sprite.material.duplicate()
 	if is_network_master():
 		$sprite.material.set_shader_param("color_replace",Color("#7278C2"))
@@ -29,6 +31,11 @@ func _physics_process(delta):
 		position.x = int(tmp.x)
 		position.y = int(tmp.y)
 		rpc_unreliable("set_pos", position)
+
+
+func set_name(new_name):
+	display_name = new_name
+	$label.text=display_name
 
 puppet func anim_hit():
 	$animation_player.play("hit")

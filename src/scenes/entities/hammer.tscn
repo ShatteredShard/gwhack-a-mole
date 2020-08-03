@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/items/marteau1.png" type="Texture" id=1]
+[ext_resource path="res://assets/items/masse2.png" type="Texture" id=1]
 [ext_resource path="res://scenes/entities/hammer.gd" type="Script" id=2]
 [ext_resource path="res://shaders/replace_color.shader" type="Shader" id=3]
+[ext_resource path="res://assets/items/masse1.png" type="Texture" id=4]
+[ext_resource path="res://assets/items/shadow.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -38,21 +40,63 @@ tracks/1/keys = {
 "method": "hit"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ), Vector2( 0, -18 ), Vector2( 0, 0 ), Vector2( 0, -16 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("shadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 0.7, 0.7 ), Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
+}
 
 [node name="hammer" type="Area2D"]
 z_index = 1
 script = ExtResource( 2 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="."]
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
+
+[node name="shadow" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
 
 [node name="sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
+position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, -2 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
-playback_speed = 4.0
+playback_speed = 3.0
 anims/hit = SubResource( 3 )
 
 [node name="label" type="Label" parent="."]
@@ -61,9 +105,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -20.0
-margin_top = -32.0
+margin_top = -48.0
 margin_right = 20.0
-margin_bottom = -18.0
+margin_bottom = -34.0
 grow_horizontal = 2
 text = "a"
 align = 1
