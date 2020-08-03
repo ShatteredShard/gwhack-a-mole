@@ -33,6 +33,7 @@ func _ready():
 			$waiting.show()
 			players_id.push_back(get_tree().get_network_unique_id())
 			get_tree().connect("network_peer_connected", self, "_player_connected")
+			get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 		else:
 			var peer = NetworkedMultiplayerENet.new()
 			peer.create_client(Gotm.lobby.host.address, PORT)
@@ -43,7 +44,6 @@ func _ready():
 
 
 func _player_connected(id):
-	print("OLALALALA")
 	print(id)
 	if Gotm.lobby.is_host():
 		if !Gotm.lobby.hidden:
@@ -52,19 +52,22 @@ func _player_connected(id):
 			rpc("_start_game")
 		else:
 			pass
+func _player_disconnected(id):
+	for obj in get_children():
+		if obj is Hammer:
+			if obj.id == id:
+				queue_free()
 
 remotesync func _start_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	print("AAAAAAAAAAAAAAha")
-	print(get_tree().get_network_unique_id())
-	
 	state = STATE.starting
 	$waiting.hide()
 	if Gotm.lobby !=null:
 		if Gotm.lobby.is_host():
 			for id in players_id:
 				players_fruits[id]={}
-				rpc("create_hammer",id,Gotm.user.display_name if get_tree().get_network_unique_id()==id else 'Guest2')
+				var name = Gotm.user.display_name if Gotm.user.display_name!='' else 'Guest'
+				rpc("create_hammer",id,name if get_tree().get_network_unique_id()==id else 'Guest2')
 			rpc("players_fruits",players_fruits,players_id)
 
 remotesync func players_fruits(new_players_fruits,new_players_id):
@@ -72,27 +75,43 @@ remotesync func players_fruits(new_players_fruits,new_players_id):
 	players_fruits=new_players_fruits
 	for id in players_id:
 		if players_fruits.has(id):
+			var count=0
 			for id_bdd in players_fruits[id]:
 				var node=$hud/cont_enemy
 				if id==get_tree().get_network_unique_id():
 					node=$hud/cont_ally
-				if node.has_node(str(id_bdd)):
-					node.get_node(str(id_bdd)).set_count(players_fruits[id][id_bdd])
-				else:
-					var tmp=FRUIT_HUD_PACKED.instance()
-					tmp.init(id_bdd,players_fruits[id][id_bdd])
-					tmp.name = str(id_bdd)
-					node.add_child(tmp)
-
+					count += players_fruits[id][id_bdd]*Bdd.fruits[id_bdd].points
+#				if node.has_node(str(id_bdd)):
+#					node.get_node(str(id_bdd)).set_count(players_fruits[id][id_bdd])
+#				else:
+#					var tmp=FRUIT_HUD_PACKED.instance()
+#					tmp.init(id_bdd,players_fruits[id][id_bdd])
+#					tmp.name = str(id_bdd)
+#					node.add_child(tmp)
+			$hud/points.text = str(count)
 remotesync func create_hammer(id,n):
 	var hammer = HAMMER_PACKED.instance()
 	hammer.position = Vector2(512/4+512/2*id,288/2)
 	hammer.id = id
-	hammer.display_name=n if n!='' else 'Guest'
+	
 	if id==get_tree().get_network_unique_id():
-		hammer.is_host=true
+		if Gotm.lobby !=null:
+			if Gotm.lobby.is_host():
+				hammer.is_host=true
+			elif Gotm.user.display_name!='':
+				n=Gotm.user.display_name
+				rpc_id(1,"set_player_name",id,Gotm.user.display_name)
+				
+		$hud/pseudo.text = n
 	hammer.set_network_master(id)
 	add_child(hammer)
+	hammer.set_name(n)
+	
+master func set_player_name(id, name):
+	for obj in get_children():
+		if obj is Hammer:
+			if obj.id == id:
+				obj.set_name(name)
 
 remotesync func pop_fruit(pos,id,id_bdd):
 	var fruit = FRUIT_PACKED.instance()

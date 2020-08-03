@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gotm/GotmUser.gd"
 }, {
+"base": "Area2D",
+"class": "Hammer",
+"language": "GDScript",
+"path": "res://scenes/entities/hammer.gd"
+}, {
 "base": "Reference",
 "class": "_GotmDebugImpl",
 "language": "GDScript",
@@ -61,6 +66,7 @@ _global_script_class_icons={
 "GotmLobby": "",
 "GotmLobbyFetch": "",
 "GotmUser": "",
+"Hammer": "",
 "_GotmDebugImpl": "",
 "_GotmImpl": "",
 "_GotmImplUtility": ""
