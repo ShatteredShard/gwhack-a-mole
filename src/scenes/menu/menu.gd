@@ -4,11 +4,14 @@ extends Control
 
 onready var _fetch = GotmLobbyFetch.new()
 
+onready var button = $v_box_container/h_box_container/button
+
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	refresh_lobbies()
 
 func _on_button_pressed():
-	$button.disabled = true
+	button.disabled = true
 	var lobbies:Array = yield(_fetch.first(1), "completed")
 	var yes=false
 	if lobbies.size()>0:
@@ -19,11 +22,11 @@ func _on_button_pressed():
 				get_tree().change_scene("res://scenes/game.tscn")
 				yes = true
 			else:
-				$button.disabled = false
+				button.disabled = false
 	if !yes:
 		Gotm.host_lobby(false)
 		Gotm.lobby.hidden = false
-		Gotm.lobby.name = "test"
+		Gotm.lobby.name = str(randi())
 		get_tree().change_scene("res://scenes/game.tscn")
 		
 		

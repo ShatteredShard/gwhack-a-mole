@@ -3,13 +3,13 @@ extends KinematicBody2D
 class_name Fruit
 
 var id:=0
+var id_bdd
+var display_name = ''
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func init(pos,new_id,new_id_bdd):
+	position = pos
+	id = new_id
+	id_bdd = new_id_bdd
+	var stat = Bdd.fruits[id_bdd]
+	display_name = stat.name
+	$sprite.texture = load(stat.sprite)
