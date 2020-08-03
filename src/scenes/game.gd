@@ -115,15 +115,14 @@ func _on_btn_alone_pressed():
 
 
 func _on_timer_timeout():
-	print("oui")
 	if Gotm.lobby!=null:
 		if Gotm.lobby.is_host() and state==STATE.starting:
 			var pos=Vector2(randi()%512,randi()%288)
 			pos=$map/navigation_2d.get_closest_point(pos)
-			var id=0
+			var id=randi()%11
 			rpc("pop_fruit",pos,fruit_count,id)
 			fruit_count +=1
-	$timer.start((randi()%5+2)/fruit_count)
+	$timer.start((randi()%5+2)/(fruit_count+1))
 
 master func hit_fruit(id_player,id_fruit):
 	print("like")

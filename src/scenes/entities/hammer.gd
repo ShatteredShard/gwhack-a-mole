@@ -1,6 +1,6 @@
 extends Area2D
 
-var fruit_under:Fruit = null
+var fruits_under:Array = []
 
 var id := 0
 
@@ -37,21 +37,22 @@ puppet func set_pos(p_pos):
 	position = p_pos
 
 func hit():
-	if fruit_under != null:
-		
-		get_parent().rpc("hit_fruit",id,fruit_under.id)
+	if fruits_under.size()>0:
+		var tmp=fruits_under.pop_front()
+		get_parent().rpc("hit_fruit",id,tmp.id)
 		
 		if !is_host:
-			fruit_under.queue_free()
-		fruit_under=null
-		
+			tmp.queue_free()
 
 
 func _on_hammer_body_entered(body):
 	if body is Fruit:
-		fruit_under = body
+		if fruits_under.find(body)==-1:
+			fruits_under.push_front(body)
 
 
 func _on_hammer_body_exited(body):
 	if body is Fruit:
-		fruit_under = null
+		var tmp=fruits_under.find(body)
+		if tmp!=-1:
+			fruits_under.remove(tmp)
