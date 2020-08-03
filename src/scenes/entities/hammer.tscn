@@ -4,15 +4,14 @@
 [ext_resource path="res://scenes/entities/hammer.gd" type="Script" id=2]
 [ext_resource path="res://shaders/replace_color.shader" type="Shader" id=3]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/color_base = Color( 0.309804, 0.65098, 0.247059, 1 )
 shader_param/color_replace = Color( 0.447059, 0.470588, 0.760784, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "hit"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:scale")
 tracks/0/interp = 1
@@ -23,7 +22,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.5, 0.6, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -45,16 +44,16 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
-material = SubResource( 5 )
+material = SubResource( 2 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -2 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
-anims/hit = SubResource( 2 )
+anims/hit = SubResource( 3 )
 
 [node name="label" type="Label" parent="."]
 anchor_left = 0.5

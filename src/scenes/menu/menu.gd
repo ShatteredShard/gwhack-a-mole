@@ -7,6 +7,7 @@ onready var _fetch = GotmLobbyFetch.new()
 onready var button = $v_box_container/h_box_container/button
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	refresh_lobbies()
 
 func _on_button_pressed():

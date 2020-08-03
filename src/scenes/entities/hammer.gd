@@ -18,14 +18,16 @@ func _ready():
 
 func _input(event):
 	if !$animation_player.is_playing() and is_network_master():
-		if event is InputEventMouseButton:
+		if event is InputEventMouseButton and event.button_index==1:
 			if event.pressed:
 				$animation_player.play("hit")
 				rpc("anim_hit")
 
 func _physics_process(delta):
 	if is_network_master():
-		position = get_global_mouse_position()
+		var tmp=get_global_mouse_position()
+		position.x = int(tmp.x)
+		position.y = int(tmp.y)
 		rpc_unreliable("set_pos", position)
 
 puppet func anim_hit():

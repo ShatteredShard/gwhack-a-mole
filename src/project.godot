@@ -75,6 +75,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Gotm="*res://gotm/Gotm.gd"
+Bdd="*res://scripts/bdd.gd"
 
 [display]
 
