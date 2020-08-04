@@ -4,6 +4,8 @@ class_name Hammer
 
 var fruits_under:Array = []
 
+var selected_fruit:Fruit
+
 var id := 0
 
 var display_name = 'b'
@@ -44,12 +46,16 @@ puppet func set_pos(p_pos):
 	position = p_pos
 
 func hit():
-	if fruits_under.size()>0:
-		var tmp=fruits_under.pop_front()
-		get_parent().rpc("hit_fruit",id,tmp.id)
+	if selected_fruit:
+		
+		
+		
+		get_parent().rpc("hit_fruit",id,selected_fruit.id)
 		
 		if !is_host:
-			tmp.queue_free()
+			selected_fruit.queue_free()
+		
+		fruits_under.remove(fruits_under.find(selected_fruit))
 
 
 func _on_hammer_body_entered(body):
@@ -62,4 +68,17 @@ func _on_hammer_body_exited(body):
 	if body is Fruit:
 		var tmp=fruits_under.find(body)
 		if tmp!=-1:
+			body.select(false)
 			fruits_under.remove(tmp)
+
+func _process(delta):
+	if fruits_under.size()>0:
+		selected_fruit = fruits_under[0]
+		for k in fruits_under.size():
+			var fruit=fruits_under[k]
+			fruit.select(false)
+			if position.distance_to(fruit.position)<position.distance_to(selected_fruit.position):
+				selected_fruit=fruit
+		selected_fruit.select()
+	else:
+		selected_fruit=null

@@ -59,13 +59,16 @@ func _player_disconnected(id):
 				queue_free()
 
 remotesync func _start_game():
+	$timer_end.start()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	state = STATE.starting
 	$waiting.hide()
 	if Gotm.lobby !=null:
 		if Gotm.lobby.is_host():
+			$timer_spawn.start()
 			for id in players_id:
 				players_fruits[id]={}
+				print(Gotm.user.display_name)
 				var name = Gotm.user.display_name if Gotm.user.display_name!='' else 'Guest'
 				rpc("create_hammer",id,name if get_tree().get_network_unique_id()==id else 'Guest2')
 			rpc("players_fruits",players_fruits,players_id)
@@ -126,6 +129,8 @@ func _on_btn_back_pressed():
 		get_tree().change_scene("res://scenes/menu/menu.tscn")
 
 func _server_disconnected():
+	if Gotm.lobby !=null:
+		Gotm.lobby.leave()
 	get_tree().change_scene("res://scenes/menu/menu.tscn")
 
 
@@ -133,7 +138,8 @@ func _on_btn_alone_pressed():
 	_start_game()
 
 
-func _on_timer_timeout():
+
+func _on_timer_spawn_timeout():
 	if Gotm.lobby!=null:
 		if Gotm.lobby.is_host() and state==STATE.starting:
 			var pos=Vector2(randi()%512,randi()%288)
@@ -141,7 +147,7 @@ func _on_timer_timeout():
 			var id=randi()%11
 			rpc("pop_fruit",pos,fruit_count,id)
 			fruit_count +=1
-	$timer.start((randi()%5+2)/(fruit_count+1))
+	$timer_spawn.start((randi()%5+2)/(fruit_count+1))
 
 master func hit_fruit(id_player,id_fruit):
 	print("like")
@@ -161,3 +167,17 @@ remote func destroy_fruit(id):
 		if obj is Fruit:
 			if obj.id == id:
 				obj.queue_free()
+
+func _process(delta):
+	if state == STATE.waiting:
+		if $timer_alone.time_left>0:
+			$waiting/v_box_container/h_box_container/btn_alone.text=str(ceil($timer_alone.time_left))
+		else:
+			$waiting/v_box_container/h_box_container/btn_alone.text="Play alone"
+			$waiting/v_box_container/h_box_container/btn_alone.disabled = false
+	if state == STATE.starting:
+		$hud/label_timer.text = str(ceil($timer_end.time_left))+" s"
+
+
+func _on_timer_end_timeout():
+	pass # Replace with function body.
