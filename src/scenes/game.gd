@@ -49,7 +49,7 @@ func _player_connected(id):
 		if !Gotm.lobby.hidden:
 			Gotm.lobby.hidden = true
 			players_id.push_back(id)
-			rpc("_start_game")
+			rpc("_start_game",players_id)
 		else:
 			pass
 func _player_disconnected(id):
@@ -58,7 +58,7 @@ func _player_disconnected(id):
 			if obj.id == id:
 				queue_free()
 
-remotesync func _start_game():
+remotesync func _start_game(new_players_id=players_id):
 	$timer_end.start()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	state = STATE.starting
@@ -71,11 +71,14 @@ remotesync func _start_game():
 				print(Gotm.user.display_name)
 				var name = Gotm.user.display_name if Gotm.user.display_name!='' else 'Guest'
 				rpc("create_hammer",id,name if get_tree().get_network_unique_id()==id else 'Guest2')
-			rpc("players_fruits",players_fruits,players_id)
+			rpc("players_fruits",players_fruits)
+		else:
+			players_id=new_players_id
 
-remotesync func players_fruits(new_players_fruits,new_players_id):
-	players_id = new_players_id
+remotesync func players_fruits(new_players_fruits):
 	players_fruits=new_players_fruits
+	print(players_fruits)
+	print(players_id)
 	for id in players_id:
 		if players_fruits.has(id):
 			var count=0
@@ -91,7 +94,8 @@ remotesync func players_fruits(new_players_fruits,new_players_id):
 #					tmp.init(id_bdd,players_fruits[id][id_bdd])
 #					tmp.name = str(id_bdd)
 #					node.add_child(tmp)
-			$hud/points.text = str(count)
+			if id==get_tree().get_network_unique_id():
+				$hud/points.text = str(count)
 remotesync func create_hammer(id,n):
 	var hammer = HAMMER_PACKED.instance()
 	hammer.position = Vector2(512/4+512/2*id,288/2)
@@ -159,7 +163,7 @@ master func hit_fruit(id_player,id_fruit):
 					players_fruits[id_player][obj.id_bdd] += 1
 				else:
 					players_fruits[id_player][obj.id_bdd] = 1
-				rpc("players_fruits",players_fruits,players_id)
+				rpc("players_fruits",players_fruits)
 				rpc("destroy_fruit",id_fruit)
 
 remote func destroy_fruit(id):

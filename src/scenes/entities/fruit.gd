@@ -19,4 +19,4 @@ func init(pos,new_id,new_id_bdd):
 	$sprite.texture = load(stat.sprite)
 
 func select(yes=true):
-	$sprite.material.set_shader_param("outline_width",1 if yes else 0)
+	$sprite.material.set_shader_param("activated", !yes)
