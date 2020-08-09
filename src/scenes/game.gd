@@ -16,6 +16,8 @@ enum STATE{
 
 var state = STATE.waiting
 
+var self_id:int
+
 var players_id := []
 
 var players_name := {}
@@ -34,13 +36,15 @@ func _ready():
 			peer.create_server(PORT)
 			get_tree().set_network_peer(peer)
 			$waiting.show()
-			players_id.push_back(get_tree().get_network_unique_id())
+			self_id = get_tree().get_network_unique_id()
+			players_id.push_back(self_id)
 			get_tree().connect("network_peer_connected", self, "_player_connected")
 			get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 		else:
 			var peer = NetworkedMultiplayerENet.new()
 			peer.create_client(Gotm.lobby.host.address, PORT)
 			get_tree().set_network_peer(peer)
+			self_id = get_tree().get_network_unique_id()
 		get_tree().connect("server_disconnected", self, "_server_disconnected")
 	else:
 		get_tree().change_scene("res://scenes/menu/menu.tscn")
@@ -195,6 +199,13 @@ remotesync func result(new_players_fruits):
 	state = STATE.ending
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$hud.queue_free()
+	if Gotm.lobby !=null:
+		Gotm.lobby.leave()
+		var peer = NetworkedMultiplayerENet.new()
+		peer.close_connection()
+		
 	for k in players_id:
 		players_hammer[k].queue_free()
-		
+	var tmp = preload("res://scenes/menu/result.tscn").instance()
+	tmp.init(self_id, players_fruits)
+	add_child(tmp)
