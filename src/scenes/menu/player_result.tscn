@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/menu/player_result.gd" type="Script" id=1]
+
+[node name="player_result" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="v_box_container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="v_box_container"]
+margin_right = 512.0
+margin_bottom = 14.0
+align = 1
+
+[node name="panel" type="Panel" parent="v_box_container"]
+margin_top = 18.0
+margin_right = 512.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="v_box_container" type="VBoxContainer" parent="v_box_container/panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="v_box_container/panel/v_box_container"]
+margin_right = 512.0
+margin_bottom = 14.0
+text = "NAME"
+align = 1
+
+[node name="label2" type="Label" parent="v_box_container/panel/v_box_container"]
+margin_top = 18.0
+margin_right = 512.0
+margin_bottom = 32.0
+text = "SCORE"
+align = 1
+
+[node name="grid_container" type="GridContainer" parent="v_box_container/panel/v_box_container"]
+margin_top = 36.0
+margin_right = 512.0
+margin_bottom = 270.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="timer" type="Timer" parent="."]

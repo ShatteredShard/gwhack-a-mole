@@ -10,7 +10,8 @@ const FRUIT_HUD_PACKED = preload("res://scenes/menu/fruit_hud.tscn")
 
 enum STATE{
 	waiting,
-	starting
+	starting,
+	ending
 }
 
 var state = STATE.waiting
@@ -20,6 +21,8 @@ var players_id := []
 var players_name := {}
 
 var players_fruits := {}
+
+var players_hammer := {}
 
 var fruit_count = 0
 
@@ -112,6 +115,7 @@ remotesync func create_hammer(id,n):
 		$hud/pseudo.text = n
 	hammer.set_network_master(id)
 	add_child(hammer)
+	players_hammer[id]=hammer
 	hammer.set_name(n)
 	
 master func set_player_name(id, name):
@@ -135,7 +139,7 @@ func _on_btn_back_pressed():
 func _server_disconnected():
 	if Gotm.lobby !=null:
 		Gotm.lobby.leave()
-	get_tree().change_scene("res://scenes/menu/menu.tscn")
+	result(players_fruits)
 
 
 func _on_btn_alone_pressed():
@@ -154,17 +158,17 @@ func _on_timer_spawn_timeout():
 	$timer_spawn.start((randi()%5+2)/(fruit_count+1))
 
 master func hit_fruit(id_player,id_fruit):
-	print("like")
-	for obj in $map/tile_wall.get_children():
-		if obj is Fruit:
-			if obj.id == id_fruit:
-				obj.queue_free()
-				if players_fruits[id_player].has(obj.id_bdd):
-					players_fruits[id_player][obj.id_bdd] += 1
-				else:
-					players_fruits[id_player][obj.id_bdd] = 1
-				rpc("players_fruits",players_fruits)
-				rpc("destroy_fruit",id_fruit)
+	if state == STATE.starting:
+		for obj in $map/tile_wall.get_children():
+			if obj is Fruit:
+				if obj.id == id_fruit:
+					obj.queue_free()
+					if players_fruits[id_player].has(obj.id_bdd):
+						players_fruits[id_player][obj.id_bdd] += 1
+					else:
+						players_fruits[id_player][obj.id_bdd] = 1
+					rpc("players_fruits",players_fruits)
+					rpc("destroy_fruit",id_fruit)
 
 remote func destroy_fruit(id):
 	for obj in $map/tile_wall.get_children():
@@ -184,4 +188,13 @@ func _process(delta):
 
 
 func _on_timer_end_timeout():
-	pass # Replace with function body.
+	state = STATE.ending
+	rpc("result",players_fruits)
+
+remotesync func result(new_players_fruits):
+	state = STATE.ending
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$hud.queue_free()
+	for k in players_id:
+		players_hammer[k].queue_free()
+		

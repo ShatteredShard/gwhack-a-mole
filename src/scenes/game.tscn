@@ -142,7 +142,7 @@ one_shot = true
 autostart = true
 
 [node name="timer_end" type="Timer" parent="."]
-wait_time = 180.0
+wait_time = 10.0
 one_shot = true
 [connection signal="pressed" from="waiting/v_box_container/h_box_container/btn_alone" to="." method="_on_btn_alone_pressed"]
 [connection signal="pressed" from="waiting/v_box_container/h_box_container/btn_back" to="." method="_on_btn_back_pressed"]
