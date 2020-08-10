@@ -7,6 +7,11 @@ onready var enemy = $v_box_container/h_box_container/enemy
 var self_id:int
 var players_fruits:Dictionary
 
+var finish = false
+
+var score_ally = -1
+var score_enemy = -1
+
 func init(new_self_id,new_players_fruits):
 	self_id = new_self_id
 	players_fruits = new_players_fruits
@@ -21,7 +26,37 @@ func _ready():
 				enemey_key = k
 		enemy.display(players_fruits[enemey_key])
 	else:
-		enemy.queue_free()
+		ally.full_size()
+		enemy.hide()
+		score_enemy = 0
 
 func _on_button_pressed():
-	get_tree().change_scene("res://scenes/menu/menu.tscn")
+	if finish:
+		get_tree().change_scene("res://scenes/menu/menu.tscn")
+	else:
+		ally.rush()
+		enemy.rush()
+
+
+func _on_result_gui_input(event):
+	if event is InputEventMouseButton:
+		ally.rush()
+		enemy.rush()
+
+
+func _on_ally_finished(score):
+	score_ally = score
+	if score_enemy != -1:
+		finish = true
+		$v_box_container/button.text='Return to menu'
+		if score_ally>score_enemy:
+			ally.win()
+
+
+func _on_enemy_finished(score):
+	score_enemy = score
+	if score_ally != -1:
+		finish = true
+		$v_box_container/button.text='Return to menu'
+		if score_ally<score_enemy:
+			enemy.win()

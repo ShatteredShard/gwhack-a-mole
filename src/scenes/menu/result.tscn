@@ -18,10 +18,12 @@ __meta__ = {
 [node name="v_box_container" type="VBoxContainer" parent="."]
 margin_right = 480.0
 margin_bottom = 240.0
+mouse_filter = 2
 
 [node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
 margin_right = 480.0
 margin_bottom = 216.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -50,5 +52,7 @@ size_flags_vertical = 3
 margin_top = 220.0
 margin_right = 480.0
 margin_bottom = 240.0
-text = "Back"
+text = "Pass"
+[connection signal="finished" from="v_box_container/h_box_container/ally" to="." method="_on_ally_finished"]
+[connection signal="finished" from="v_box_container/h_box_container/enemy" to="." method="_on_enemy_finished"]
 [connection signal="pressed" from="v_box_container/button" to="." method="_on_button_pressed"]

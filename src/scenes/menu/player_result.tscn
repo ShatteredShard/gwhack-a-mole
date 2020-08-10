@@ -5,6 +5,7 @@
 [node name="player_result" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -13,25 +14,30 @@ __meta__ = {
 [node name="v_box_container" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label" type="Label" parent="v_box_container"]
+self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 512.0
 margin_bottom = 14.0
+text = "WINNER"
 align = 1
 
 [node name="panel" type="Panel" parent="v_box_container"]
 margin_top = 18.0
 margin_right = 512.0
 margin_bottom = 288.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="v_box_container" type="VBoxContainer" parent="v_box_container/panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,22 +48,26 @@ margin_bottom = 14.0
 text = "NAME"
 align = 1
 
-[node name="label2" type="Label" parent="v_box_container/panel/v_box_container"]
+[node name="score" type="Label" parent="v_box_container/panel/v_box_container"]
 margin_top = 18.0
 margin_right = 512.0
 margin_bottom = 32.0
-text = "SCORE"
+text = "0"
 align = 1
 
 [node name="grid_container" type="GridContainer" parent="v_box_container/panel/v_box_container"]
 margin_top = 36.0
 margin_right = 512.0
 margin_bottom = 270.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 4
+columns = 3
 
 [node name="timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="tween" type="Tween" parent="."]
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+[connection signal="tween_step" from="tween" to="." method="_on_tween_tween_step"]
