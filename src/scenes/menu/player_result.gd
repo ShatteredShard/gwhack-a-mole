@@ -39,12 +39,13 @@ func _on_timer_timeout():
 func rush():
 	$timer.stop()
 	$tween.stop_all()
-	for id_bdd in player_fruits:
+	for id_bdd in keys:
 		var tmp = FRUIT_HUD_PACKED.instance()
 		tmp.init(id_bdd,player_fruits[id_bdd])
 		tmp.name = str(id_bdd)
 		tmp.instant = true
 		cont.add_child(tmp)
+		score += player_fruits[id_bdd]*Bdd.fruits[id_bdd].points
 	label_score.text = str(int(score))
 	emit_signal("finished",score)
 
