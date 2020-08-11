@@ -15,7 +15,6 @@ margin_right = 40.0
 margin_bottom = 14.0
 
 [node name="timer" type="Timer" parent="."]
-wait_time = 5.0
 autostart = true
 
 [node name="v_box_container" type="VBoxContainer" parent="."]
