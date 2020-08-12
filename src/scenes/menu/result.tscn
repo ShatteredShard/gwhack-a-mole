@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/menu/player_result.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/result.gd" type="Script" id=2]
+[ext_resource path="res://assets/hud/menu.theme" type="Theme" id=3]
 
 [node name="result" type="MarginContainer"]
 anchor_right = 1.0
@@ -10,6 +11,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = -16.0
 margin_bottom = -32.0
+theme = ExtResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -22,7 +24,7 @@ mouse_filter = 2
 
 [node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
 margin_right = 480.0
-margin_bottom = 216.0
+margin_bottom = 213.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -35,7 +37,7 @@ __meta__ = {
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 238.0
-margin_bottom = 216.0
+margin_bottom = 213.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -44,12 +46,12 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 242.0
 margin_right = 480.0
-margin_bottom = 216.0
+margin_bottom = 213.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="button" type="Button" parent="v_box_container"]
-margin_top = 220.0
+margin_top = 217.0
 margin_right = 480.0
 margin_bottom = 240.0
 text = "Pass"
