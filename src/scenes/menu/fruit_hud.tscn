@@ -21,13 +21,24 @@ mouse_filter = 2
 texture = ExtResource( 1 )
 stretch_mode = 4
 
-[node name="label" type="Label" parent="."]
+[node name="label2" type="Label" parent="."]
 margin_left = 40.0
-margin_right = 72.0
+margin_right = 47.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 4, 32 )
+text = "x"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="."]
+margin_left = 55.0
+margin_right = 87.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 text = "0"
-align = 1
 valign = 1
 
 [node name="tween" type="Tween" parent="."]

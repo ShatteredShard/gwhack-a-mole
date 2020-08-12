@@ -15,7 +15,7 @@ var display_score = 0
 
 var speed = 0.5
 
-func display(new_player_fruits,new_name,is_enemy):
+func display(new_player_fruits,new_name,is_enemy=false):
 	player_fruits = new_player_fruits
 	keys = player_fruits.keys()
 	$timer.start()
@@ -24,7 +24,7 @@ func display(new_player_fruits,new_name,is_enemy):
 		label_name.set("custom_colors/font_color", Color("#EA3131"))
 
 func full_size():
-	$v_box_container/panel/v_box_container/grid_container.columns = 6
+	$v_box_container/panel/v_box_container/grid_container.columns = 5
 
 func _on_timer_timeout():
 	if keys.size()>0:
