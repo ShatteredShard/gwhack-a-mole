@@ -6,25 +6,26 @@ onready var enemy = $v_box_container/h_box_container/enemy
 
 var self_id:int
 var players_fruits:Dictionary
+var players_name:Dictionary
 
 var finish = false
 
 var score_ally = -1
 var score_enemy = -1
 
-func init(new_self_id,new_players_fruits):
+func init(new_self_id,new_players_fruits,new_players_name):
 	self_id = new_self_id
 	players_fruits = new_players_fruits
-
+	players_name = new_players_name
 func _ready():
-	ally.display(players_fruits[self_id])
+	ally.display(players_fruits[self_id],players_name[self_id])
 	var enemey_key = 1
 	var keys = players_fruits.keys()
 	if keys.size()>1:
 		for k in keys:
 			if k!=self_id:
 				enemey_key = k
-		enemy.display(players_fruits[enemey_key])
+		enemy.display(players_fruits[enemey_key],players_name[enemey_key],true)
 	else:
 		ally.full_size()
 		enemy.hide()

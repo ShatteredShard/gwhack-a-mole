@@ -23,6 +23,7 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 512.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.847059, 0, 1 )
 text = "WINNER"
 align = 1
 
@@ -45,6 +46,7 @@ __meta__ = {
 [node name="label" type="Label" parent="v_box_container/panel/v_box_container"]
 margin_right = 512.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 0.447059, 0.470588, 0.760784, 1 )
 text = "NAME"
 align = 1
 

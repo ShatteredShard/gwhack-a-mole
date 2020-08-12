@@ -4,6 +4,7 @@ signal finished(score)
 
 const FRUIT_HUD_PACKED = preload("res://scenes/menu/fruit_hud.tscn")
 onready var cont = $v_box_container/panel/v_box_container/grid_container
+onready var label_name = $v_box_container/panel/v_box_container/label
 onready var label_score = $v_box_container/panel/v_box_container/score
 var player_fruits:Dictionary
 
@@ -14,10 +15,13 @@ var display_score = 0
 
 var speed = 0.5
 
-func display(new_player_fruits):
+func display(new_player_fruits,new_name,is_enemy):
 	player_fruits = new_player_fruits
 	keys = player_fruits.keys()
 	$timer.start()
+	label_name.text=new_name
+	if is_enemy:
+		label_name.set("custom_colors/font_color", Color("#EA3131"))
 
 func full_size():
 	$v_box_container/panel/v_box_container/grid_container.columns = 6

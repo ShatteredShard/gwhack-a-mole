@@ -107,13 +107,14 @@ remotesync func create_hammer(id,n):
 	var hammer = HAMMER_PACKED.instance()
 	hammer.position = Vector2(512/4+512/2*id,288/2)
 	hammer.id = id
-	
+	players_name[id] = n
 	if id==get_tree().get_network_unique_id():
 		if Gotm.lobby !=null:
 			if Gotm.lobby.is_host():
 				hammer.is_host=true
 			elif Gotm.user.display_name!='':
 				n=Gotm.user.display_name
+				players_name[id] = n
 				rpc_id(1,"set_player_name",id,Gotm.user.display_name)
 				
 		$hud/pseudo.text = n
@@ -123,6 +124,7 @@ remotesync func create_hammer(id,n):
 	hammer.set_name(n)
 	
 master func set_player_name(id, name):
+	players_name[id] = name
 	for obj in get_children():
 		if obj is Hammer:
 			if obj.id == id:
@@ -207,5 +209,5 @@ remotesync func result(new_players_fruits):
 	for k in players_id:
 		players_hammer[k].queue_free()
 	var tmp = preload("res://scenes/menu/result.tscn").instance()
-	tmp.init(self_id, players_fruits)
+	tmp.init(self_id, players_fruits, players_name)
 	add_child(tmp)
