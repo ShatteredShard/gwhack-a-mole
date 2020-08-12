@@ -15,9 +15,9 @@ var is_host:=false
 func _ready():
 	
 	$sprite.material=$sprite.material.duplicate()
-	if is_network_master():
-		$sprite.material.set_shader_param("color_replace",Color("#7278C2"))
-	else:
+	if !is_network_master():
+		
+		$label.set("custom_colors/font_color", Color("#EA3131"))
 		$sprite.material.set_shader_param("color_replace",Color("#EA3131"))
 
 func _input(event):

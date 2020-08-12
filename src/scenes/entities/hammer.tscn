@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/sfx/impact1.png" type="Texture" id=7]
 [ext_resource path="res://assets/sfx/impact4.png" type="Texture" id=8]
 [ext_resource path="res://assets/sfx/impact3.png" type="Texture" id=9]
+[ext_resource path="res://assets/hud/menu.theme" type="Theme" id=6]
+[ext_resource path="res://assets/font/big_pixel.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -109,6 +111,11 @@ tracks/5/keys = {
 } ]
 }
 
+[sub_resource type="DynamicFont" id=4]
+size = 20
+outline_size = 1
+font_data = ExtResource( 7 )
+
 [node name="hammer" type="Area2D" groups=[
 "hammer",
 ]]
@@ -142,10 +149,17 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -20.0
-margin_top = -48.0
+margin_top = -56.0
 margin_right = 20.0
-margin_bottom = -34.0
+margin_bottom = -36.0
 grow_horizontal = 2
+theme = ExtResource( 6 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.447059, 0.470588, 0.760784, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = -1
+custom_constants/shadow_as_outline = 2
 text = "a"
 align = 1
 valign = 1
