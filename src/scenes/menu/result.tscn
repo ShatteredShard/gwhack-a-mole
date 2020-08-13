@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/menu/player_result.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/result.gd" type="Script" id=2]
 [ext_resource path="res://assets/hud/menu.theme" type="Theme" id=3]
 [ext_resource path="res://sounds/select_007.ogg" type="AudioStream" id=4]
+[ext_resource path="res://musics/loose.ogg" type="AudioStream" id=5]
 
 [node name="result" type="MarginContainer"]
 anchor_right = 1.0
@@ -60,6 +61,9 @@ text = "Pass"
 [node name="audio_stream_player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -10.0
+
+[node name="loose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="finished" from="v_box_container/h_box_container/ally" to="." method="_on_ally_finished"]
 [connection signal="finished" from="v_box_container/h_box_container/enemy" to="." method="_on_enemy_finished"]
 [connection signal="pressed" from="v_box_container/button" to="." method="_on_button_pressed"]

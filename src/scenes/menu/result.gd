@@ -62,3 +62,4 @@ func _on_enemy_finished(score):
 		$v_box_container/button.text='Return to menu'
 		if score_ally<score_enemy:
 			enemy.win()
+			$loose.play()

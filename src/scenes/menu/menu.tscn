@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/guacamole.png" type="Texture" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://assets/title/mole.png" type="Texture" id=12]
 [ext_resource path="res://assets/title/doritos.png" type="Texture" id=13]
 [ext_resource path="res://sounds/select_007.ogg" type="AudioStream" id=14]
+[ext_resource path="res://assets/title/title.png" type="Texture" id=15]
+[ext_resource path="res://musics/title.ogg" type="AudioStream" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -191,7 +193,7 @@ tracks/13/keys = {
 }
 tracks/14/type = "value"
 tracks/14/path = NodePath("v_box_container/h_box_container/control/button:rect_scale")
-tracks/14/interp = 1
+tracks/14/interp = 2
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
@@ -200,6 +202,30 @@ tracks/14/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1.1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("v_box_container/texture_rect/viewport/title:rect_scale")
+tracks/15/interp = 2
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("v_box_container/texture_rect/viewport/title:rect_rotation")
+tracks/16/interp = 2
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -37.4, 10.0, 0.0 ]
 }
 
 [node name="menu" type="Control"]
@@ -246,65 +272,42 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="guacamole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = -48.0
-margin_top = -4.0
-margin_right = 76.0002
-margin_bottom = 78.0
-rect_rotation = -9.4
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 174.0
+margin_bottom = 132.0
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="citrus2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 224.001
-margin_bottom = 182.0
-rect_rotation = 121.6
+visible = false
+margin_left = 150.0
+margin_top = 150.0
+margin_right = 274.001
+margin_bottom = 232.0
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="mole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 300.0
-margin_top = 150.0
-margin_right = 424.0
-margin_bottom = 232.0
-rect_scale = Vector2( 1, 1e-05 )
-rect_pivot_offset = Vector2( 0, 33 )
-texture = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="guacagoutte" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = -25.0
-margin_top = -25.0
-margin_right = 99.0003
-margin_bottom = 57.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 149.0
+margin_bottom = 107.0
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="guacagoutte2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_top = -25.0
-margin_right = 124.0
-margin_bottom = 57.0
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="hammer" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 250.0
+margin_left = 75.0
 margin_top = 25.0
-margin_right = 374.0
+margin_right = 199.0
 margin_bottom = 107.0
-rect_rotation = -56.1
-texture = ExtResource( 6 )
+texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -321,15 +324,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="doritos" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 50.0
+[node name="title" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 110.0
 margin_top = 50.0
-margin_right = 174.0
-margin_bottom = 132.0
+margin_right = 360.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 125, 75 )
+texture = ExtResource( 15 )
+
+[node name="doritos" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 224.0
+margin_bottom = 182.0
 grow_horizontal = 2
-rect_rotation = 37.4
 rect_pivot_offset = Vector2( 20, 0 )
 texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hammer" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 300.0
+margin_top = 25.0
+margin_right = 424.0
+margin_bottom = 107.0
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -340,9 +360,19 @@ margin_top = 50.0
 margin_right = 444.0
 margin_bottom = 132.0
 grow_horizontal = 2
-rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 40, 40 )
 texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 300.0
+margin_top = 150.0
+margin_right = 424.0
+margin_bottom = 232.0
+rect_pivot_offset = Vector2( 0, 33 )
+texture = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -366,7 +396,6 @@ margin_top = -48.0
 margin_right = 32.0
 margin_bottom = -25.0
 rect_min_size = Vector2( 64, 0 )
-rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 32, 32 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -395,5 +424,10 @@ anims/enter = SubResource( 2 )
 [node name="audio_stream_player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 volume_db = -10.0
+
+[node name="audio_stream_player2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = -10.0
+autoplay = true
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="v_box_container/h_box_container/control/button" to="." method="_on_button_pressed"]

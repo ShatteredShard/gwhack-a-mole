@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/env/map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/items/piment.png" type="Texture" id=8]
 [ext_resource path="res://assets/items/tomate.png" type="Texture" id=9]
 [ext_resource path="res://sounds/select_007.ogg" type="AudioStream" id=10]
+[ext_resource path="res://musics/game.ogg" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "loop"
@@ -268,6 +269,11 @@ anims/rules = SubResource( 2 )
 [node name="audio_stream_player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
+
+[node name="audio_stream_player2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -10.0
+autoplay = true
 [connection signal="pressed" from="waiting/v_box_container/h_box_container/btn_alone" to="." method="_on_btn_alone_pressed"]
 [connection signal="pressed" from="waiting/v_box_container/h_box_container/btn_back" to="." method="_on_btn_back_pressed"]
 [connection signal="timeout" from="timer_spawn" to="." method="_on_timer_spawn_timeout"]
