@@ -245,20 +245,22 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="guacamole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 174.0
-margin_bottom = 132.0
+margin_left = -48.0
+margin_top = -4.0
+margin_right = 76.0002
+margin_bottom = 78.0
+rect_rotation = -9.4
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="citrus2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 150.0
-margin_top = 150.0
-margin_right = 274.0
-margin_bottom = 232.0
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 224.001
+margin_bottom = 182.0
+rect_rotation = 121.6
 texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -269,6 +271,7 @@ margin_left = 300.0
 margin_top = 150.0
 margin_right = 424.0
 margin_bottom = 232.0
+rect_scale = Vector2( 1, 1e-05 )
 rect_pivot_offset = Vector2( 0, 33 )
 texture = ExtResource( 12 )
 __meta__ = {
@@ -276,30 +279,30 @@ __meta__ = {
 }
 
 [node name="guacagoutte" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 149.0
-margin_bottom = 107.0
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 99.0003
+margin_bottom = 57.0
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="guacagoutte2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 75.0
-margin_top = 25.0
-margin_right = 199.0
-margin_bottom = 107.0
+margin_top = -25.0
+margin_right = 124.0
+margin_bottom = 57.0
 texture = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="hammer" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 300.0
+margin_left = 250.0
 margin_top = 25.0
-margin_right = 424.0
+margin_right = 374.0
 margin_bottom = 107.0
+rect_rotation = -56.1
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -318,11 +321,12 @@ __meta__ = {
 }
 
 [node name="doritos" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 224.0
-margin_bottom = 182.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 174.0
+margin_bottom = 132.0
 grow_horizontal = 2
+rect_rotation = 37.4
 rect_pivot_offset = Vector2( 20, 0 )
 texture = ExtResource( 13 )
 __meta__ = {
@@ -335,6 +339,7 @@ margin_top = 50.0
 margin_right = 444.0
 margin_bottom = 132.0
 grow_horizontal = 2
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 40, 40 )
 texture = ExtResource( 8 )
 __meta__ = {
@@ -360,6 +365,7 @@ margin_top = -48.0
 margin_right = 32.0
 margin_bottom = -25.0
 rect_min_size = Vector2( 64, 0 )
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 32, 32 )
 focus_mode = 0
 enabled_focus_mode = 0
