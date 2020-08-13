@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/guacamole.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/title/citron_lamelle.png" type="Texture" id=11]
 [ext_resource path="res://assets/title/mole.png" type="Texture" id=12]
 [ext_resource path="res://assets/title/doritos.png" type="Texture" id=13]
+[ext_resource path="res://sounds/select_007.ogg" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -390,5 +391,9 @@ __meta__ = {
 autoplay = "enter"
 playback_speed = 2.0
 anims/enter = SubResource( 2 )
+
+[node name="audio_stream_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -10.0
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="v_box_container/h_box_container/control/button" to="." method="_on_button_pressed"]

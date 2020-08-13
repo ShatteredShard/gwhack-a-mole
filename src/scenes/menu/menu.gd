@@ -11,6 +11,7 @@ func _ready():
 	refresh_lobbies()
 
 func _on_button_pressed():
+	$audio_stream_player.play()
 	button.disabled = true
 	var lobbies:Array = yield(_fetch.first(1), "completed")
 	var yes=false

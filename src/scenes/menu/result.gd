@@ -32,6 +32,7 @@ func _ready():
 		score_enemy = 0
 
 func _on_button_pressed():
+	$audio_stream_player.play()
 	if finish:
 		get_tree().change_scene("res://scenes/menu/menu.tscn")
 	else:

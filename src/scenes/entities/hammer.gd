@@ -56,6 +56,11 @@ func hit():
 			selected_fruit.queue_free()
 		
 		fruits_under.remove(fruits_under.find(selected_fruit))
+		$smash_fruit.pitch_scale=(randf()*10+15)/10
+		$smash_fruit.play()
+	else:
+		$smash_ground.pitch_scale=(randf()*10+10)/10
+		$smash_ground.play()
 	impact.position = position
 	get_parent().add_child(impact)
 

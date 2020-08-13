@@ -137,6 +137,7 @@ remotesync func pop_fruit(pos,id,id_bdd):
 	$map/tile_wall.add_child(fruit)
 
 func _on_btn_back_pressed():
+	$audio_stream_player.play()
 	if Gotm.lobby !=null:
 		Gotm.lobby.leave()
 		var peer = NetworkedMultiplayerENet.new()
@@ -150,6 +151,7 @@ func _server_disconnected():
 
 
 func _on_btn_alone_pressed():
+	$audio_stream_player.play()
 	_start_game()
 
 
