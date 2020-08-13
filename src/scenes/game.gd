@@ -197,20 +197,20 @@ func _process(delta):
 
 
 func _on_timer_end_timeout():
-	state = STATE.ending
 	rpc("result",players_fruits)
 
 remotesync func result(new_players_fruits):
-	state = STATE.ending
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$hud.queue_free()
-	if Gotm.lobby !=null:
-		Gotm.lobby.leave()
-		var peer = NetworkedMultiplayerENet.new()
-		peer.close_connection()
-		
-	for k in players_id:
-		players_hammer[k].queue_free()
-	var tmp = preload("res://scenes/menu/result.tscn").instance()
-	tmp.init(self_id, players_fruits, players_name)
-	add_child(tmp)
+	if state != STATE.ending:
+		state = STATE.ending
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$hud.queue_free()
+		if Gotm.lobby !=null:
+			Gotm.lobby.leave()
+			var peer = NetworkedMultiplayerENet.new()
+			peer.close_connection()
+			
+		for k in players_id:
+			players_hammer[k].queue_free()
+		var tmp = preload("res://scenes/menu/result.tscn").instance()
+		tmp.init(self_id, players_fruits, players_name)
+		add_child(tmp)

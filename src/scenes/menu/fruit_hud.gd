@@ -28,4 +28,4 @@ func _ready():
 
 
 func _on_tween_tween_step(object, key, elapsed, value):
-	$label.text=str(actual_count)
+	$label.text=str(int(actual_count))
