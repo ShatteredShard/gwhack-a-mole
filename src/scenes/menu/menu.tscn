@@ -1,14 +1,27 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/guacamole.png" type="Texture" id=2]
 [ext_resource path="res://assets/hud/menu.theme" type="Theme" id=3]
 [ext_resource path="res://assets/hud/schema.png" type="Texture" id=4]
+[ext_resource path="res://shaders/outline.shader" type="Shader" id=5]
+[ext_resource path="res://assets/title/marteau.png" type="Texture" id=6]
+[ext_resource path="res://assets/title/citron.png" type="Texture" id=7]
+[ext_resource path="res://assets/title/citron_splatch.png" type="Texture" id=8]
+[ext_resource path="res://assets/title/guaca_goutte.png" type="Texture" id=9]
+[ext_resource path="res://assets/title/guaca_goutte2.png" type="Texture" id=10]
+[ext_resource path="res://assets/title/citron_lamelle.png" type="Texture" id=11]
+[ext_resource path="res://assets/title/mole.png" type="Texture" id=12]
+[ext_resource path="res://assets/title/doritos.png" type="Texture" id=13]
 
-[sub_resource type="Animation" id=1]
-resource_name = "enter"
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/outline_width = 2.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
-tracks/0/path = NodePath("v_box_container/texture_rect/texture_rect:rect_position")
+tracks/0/path = NodePath("v_box_container/texture_rect/viewport/guacamole:rect_position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -17,7 +30,175 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -48, -4 ), Vector2( 23, 11 ) ]
+"values": [ Vector2( -48, -4 ), Vector2( 50, 50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("v_box_container/texture_rect/viewport/guacamole:rect_rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -9.4, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("v_box_container/texture_rect/viewport/hammer:rect_rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -56.1, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("v_box_container/texture_rect/viewport/hammer:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 250, 25 ), Vector2( 300, 25 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("v_box_container/texture_rect/viewport/citrus:rect_scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.2, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("v_box_container/texture_rect/viewport/splash:rect_scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("v_box_container/texture_rect/viewport/guacagoutte:rect_position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -25, -25 ), Vector2( 25, 25 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("v_box_container/texture_rect/viewport/guacagoutte2:rect_position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -25 ), Vector2( 75, 25 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("v_box_container/texture_rect/viewport/citrus2:rect_position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 100, 100 ), Vector2( 150, 150 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("v_box_container/texture_rect/viewport/citrus2:rect_rotation")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 121.6, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("v_box_container/texture_rect/viewport/mole:rect_position")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 300, 150 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("v_box_container/texture_rect/viewport/mole:rect_scale")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1e-05 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("v_box_container/texture_rect/viewport/doritos:rect_position")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 50, 50 ), Vector2( 100, 100 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("v_box_container/texture_rect/viewport/doritos:rect_rotation")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 37.4, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("v_box_container/h_box_container/control/button:rect_scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.7, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1.1, 1 ), Vector2( 1, 1 ) ]
 }
 
 [node name="menu" type="Control"]
@@ -30,8 +211,12 @@ __meta__ = {
 }
 
 [node name="label" type="Label" parent="."]
+margin_left = 8.0
 margin_right = 40.0
 margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="timer" type="Timer" parent="."]
 autostart = true
@@ -39,46 +224,156 @@ autostart = true
 [node name="v_box_container" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = 9.0
 custom_constants/separation = 32
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="texture_rect" type="Control" parent="v_box_container"]
-margin_top = 16.0
+[node name="texture_rect" type="ViewportContainer" parent="v_box_container"]
+material = SubResource( 1 )
 margin_right = 512.0
-margin_bottom = 216.0
+margin_bottom = 265.0
 rect_min_size = Vector2( 512, 200 )
+size_flags_vertical = 3
 
-[node name="texture_rect" type="TextureRect" parent="v_box_container/texture_rect"]
-margin_left = 23.0
-margin_top = 11.0
-margin_right = 147.0
-margin_bottom = 93.0
+[node name="viewport" type="Viewport" parent="v_box_container/texture_rect"]
+size = Vector2( 512, 233 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="guacamole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 174.0
+margin_bottom = 132.0
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="citrus2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 150.0
+margin_top = 150.0
+margin_right = 274.0
+margin_bottom = 232.0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mole" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 300.0
+margin_top = 150.0
+margin_right = 424.0
+margin_bottom = 232.0
+rect_pivot_offset = Vector2( 0, 33 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="guacagoutte" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 149.0
+margin_bottom = 107.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="guacagoutte2" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 75.0
+margin_top = 25.0
+margin_right = 199.0
+margin_bottom = 107.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hammer" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 300.0
+margin_top = 25.0
+margin_right = 424.0
+margin_bottom = 107.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="citrus" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 340.0
+margin_top = 60.0
+margin_right = 464.0
+margin_bottom = 142.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 20, 0 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="doritos" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 224.0
+margin_bottom = 182.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 20, 0 )
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="splash" type="TextureRect" parent="v_box_container/texture_rect/viewport"]
+margin_left = 320.0
+margin_top = 50.0
+margin_right = 444.0
+margin_bottom = 132.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="h_box_container" type="HBoxContainer" parent="v_box_container"]
-margin_top = 248.0
+margin_top = 297.0
 margin_right = 512.0
-margin_bottom = 271.0
+margin_bottom = 297.0
 alignment = 1
 
-[node name="button" type="Button" parent="v_box_container/h_box_container"]
-margin_right = 512.0
-margin_bottom = 23.0
+[node name="control" type="Control" parent="v_box_container/h_box_container"]
+margin_left = 256.0
+margin_right = 256.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="button" type="Button" parent="v_box_container/h_box_container/control"]
+margin_left = -32.0
+margin_top = -48.0
+margin_right = 32.0
+margin_bottom = -25.0
+rect_min_size = Vector2( 64, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
 focus_mode = 0
-size_flags_horizontal = 3
 enabled_focus_mode = 0
 text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="texture_rect" type="TextureRect" parent="v_box_container/h_box_container/button"]
+[node name="texture_rect" type="TextureRect" parent="v_box_container/h_box_container/control/button"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -4.0
+margin_bottom = 1.0
 texture = ExtResource( 4 )
 stretch_mode = 2
 __meta__ = {
@@ -87,7 +382,7 @@ __meta__ = {
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 autoplay = "enter"
-playback_speed = 4.0
-anims/enter = SubResource( 1 )
+playback_speed = 2.0
+anims/enter = SubResource( 2 )
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="v_box_container/h_box_container/button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="v_box_container/h_box_container/control/button" to="." method="_on_button_pressed"]

@@ -2,6 +2,8 @@ extends Area2D
 
 class_name Hammer
 
+const IMPACT_PACKED = preload("res://scenes/fx/impact.tscn")
+
 var fruits_under:Array = []
 
 var selected_fruit:Fruit
@@ -46,17 +48,16 @@ puppet func set_pos(p_pos):
 	position = p_pos
 
 func hit():
+	var impact = IMPACT_PACKED.instance()
 	if selected_fruit:
-		
-		
-		
 		get_parent().rpc("hit_fruit",id,selected_fruit.id)
 		
 		if !is_host:
 			selected_fruit.queue_free()
 		
 		fruits_under.remove(fruits_under.find(selected_fruit))
-
+	impact.position = position
+	get_parent().add_child(impact)
 
 func _on_hammer_body_entered(body):
 	if body is Fruit:

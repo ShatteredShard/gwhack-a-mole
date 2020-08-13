@@ -4,7 +4,7 @@ extends Control
 
 onready var _fetch = GotmLobbyFetch.new()
 
-onready var button = $v_box_container/h_box_container/button
+onready var button = $v_box_container/h_box_container/control/button
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

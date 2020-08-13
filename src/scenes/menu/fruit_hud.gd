@@ -13,7 +13,9 @@ func init(new_id_bdd,new_count):
 	var stat = Bdd.fruits[new_id_bdd]
 	$texture_rect.texture = load(stat.sprite)
 	set_count(new_count)
-
+	if stat.points<0:
+		$label2.set("custom_colors/font_color", Color("#FF0000"))
+		$label.set("custom_colors/font_color", Color("#FF0000"))
 func set_count(new_count):
 	count = new_count
 
