@@ -66,6 +66,7 @@ func _player_disconnected(id):
 				queue_free()
 
 remotesync func _start_game(new_players_id=players_id):
+	$animation_player.play("rules")
 	$timer_end.start()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	state = STATE.starting
@@ -119,7 +120,7 @@ remotesync func create_hammer(id,n):
 				
 		$hud/pseudo.text = n
 	hammer.set_network_master(id)
-	add_child(hammer)
+	add_child_below_node($map,hammer)
 	players_hammer[id]=hammer
 	hammer.set_name(n)
 	

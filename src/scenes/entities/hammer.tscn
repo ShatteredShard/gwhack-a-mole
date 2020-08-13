@@ -10,12 +10,12 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/color_base = Color( 0.309804, 0.65098, 0.247059, 1 )
 shader_param/color_replace = Color( 0.447059, 0.470588, 0.760784, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:scale")
 tracks/0/interp = 1
@@ -79,7 +79,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0.8, 0.8 ), Vector2( 0.7, 0.7 ), Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 0.8, 0.8 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 20
 outline_size = 1
 font_data = ExtResource( 7 )
@@ -87,7 +87,6 @@ font_data = ExtResource( 7 )
 [node name="hammer" type="Area2D" groups=[
 "hammer",
 ]]
-z_index = 1
 script = ExtResource( 2 )
 
 [node name="collision_shape_2d" type="CollisionShape2D" parent="."]
@@ -99,13 +98,13 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 5 )
 
 [node name="sprite" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 playback_speed = 3.0
-anims/hit = SubResource( 4 )
+anims/hit = SubResource( 3 )
 
 [node name="label" type="Label" parent="."]
 anchor_left = 0.5
@@ -118,7 +117,7 @@ margin_right = 20.0
 margin_bottom = -36.0
 grow_horizontal = 2
 theme = ExtResource( 6 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.447059, 0.470588, 0.760784, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
